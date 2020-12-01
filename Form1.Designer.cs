@@ -167,6 +167,8 @@
             this.DGV_Rental.Name = "DGV_Rental";
             this.DGV_Rental.Size = new System.Drawing.Size(602, 207);
             this.DGV_Rental.TabIndex = 0;
+            this.DGV_Rental.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Rental_CellContentClick);
+            this.DGV_Rental.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Rental_CellContentClick);
             // 
             // Customer_panel
             // 
@@ -255,9 +257,9 @@
             // Btn_Update_customdata
             // 
             this.Btn_Update_customdata.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Btn_Update_customdata.Location = new System.Drawing.Point(252, 120);
+            this.Btn_Update_customdata.Location = new System.Drawing.Point(252, 138);
             this.Btn_Update_customdata.Name = "Btn_Update_customdata";
-            this.Btn_Update_customdata.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Update_customdata.Size = new System.Drawing.Size(75, 32);
             this.Btn_Update_customdata.TabIndex = 3;
             this.Btn_Update_customdata.Text = "Update";
             this.Btn_Update_customdata.UseVisualStyleBackColor = false;
@@ -268,7 +270,7 @@
             this.Btn_del_customer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.Btn_del_customer.Location = new System.Drawing.Point(252, 82);
             this.Btn_del_customer.Name = "Btn_del_customer";
-            this.Btn_del_customer.Size = new System.Drawing.Size(75, 23);
+            this.Btn_del_customer.Size = new System.Drawing.Size(75, 34);
             this.Btn_del_customer.TabIndex = 2;
             this.Btn_del_customer.Text = "Delete";
             this.Btn_del_customer.UseVisualStyleBackColor = false;
@@ -276,9 +278,9 @@
             // Btn_Add_customer
             // 
             this.Btn_Add_customer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Btn_Add_customer.Location = new System.Drawing.Point(252, 41);
+            this.Btn_Add_customer.Location = new System.Drawing.Point(252, 30);
             this.Btn_Add_customer.Name = "Btn_Add_customer";
-            this.Btn_Add_customer.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Add_customer.Size = new System.Drawing.Size(75, 35);
             this.Btn_Add_customer.TabIndex = 1;
             this.Btn_Add_customer.Text = "Add ";
             this.Btn_Add_customer.UseVisualStyleBackColor = false;
@@ -316,22 +318,24 @@
             // Btn_Return
             // 
             this.Btn_Return.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Btn_Return.Location = new System.Drawing.Point(140, 195);
+            this.Btn_Return.Location = new System.Drawing.Point(140, 183);
             this.Btn_Return.Name = "Btn_Return";
-            this.Btn_Return.Size = new System.Drawing.Size(75, 23);
+            this.Btn_Return.Size = new System.Drawing.Size(75, 35);
             this.Btn_Return.TabIndex = 13;
             this.Btn_Return.Text = "Return";
             this.Btn_Return.UseVisualStyleBackColor = false;
+            this.Btn_Return.Click += new System.EventHandler(this.Btn_Return_Click);
             // 
             // btn_Issue
             // 
             this.btn_Issue.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.btn_Issue.Location = new System.Drawing.Point(36, 195);
+            this.btn_Issue.Location = new System.Drawing.Point(36, 183);
             this.btn_Issue.Name = "btn_Issue";
-            this.btn_Issue.Size = new System.Drawing.Size(75, 23);
+            this.btn_Issue.Size = new System.Drawing.Size(75, 35);
             this.btn_Issue.TabIndex = 12;
             this.btn_Issue.Text = "Issue";
             this.btn_Issue.UseVisualStyleBackColor = false;
+            this.btn_Issue.Click += new System.EventHandler(this.btn_Issue_Click);
             // 
             // Return_datePicker
             // 
@@ -550,7 +554,7 @@
             this.Btn_updatemovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.Btn_updatemovie.Location = new System.Drawing.Point(187, 381);
             this.Btn_updatemovie.Name = "Btn_updatemovie";
-            this.Btn_updatemovie.Size = new System.Drawing.Size(75, 23);
+            this.Btn_updatemovie.Size = new System.Drawing.Size(75, 37);
             this.Btn_updatemovie.TabIndex = 3;
             this.Btn_updatemovie.Text = "Update ";
             this.Btn_updatemovie.UseVisualStyleBackColor = false;
@@ -559,9 +563,9 @@
             // Btn_delmovie
             // 
             this.Btn_delmovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Btn_delmovie.Location = new System.Drawing.Point(105, 383);
+            this.Btn_delmovie.Location = new System.Drawing.Point(105, 379);
             this.Btn_delmovie.Name = "Btn_delmovie";
-            this.Btn_delmovie.Size = new System.Drawing.Size(75, 23);
+            this.Btn_delmovie.Size = new System.Drawing.Size(75, 39);
             this.Btn_delmovie.TabIndex = 2;
             this.Btn_delmovie.Text = "Delete ";
             this.Btn_delmovie.UseVisualStyleBackColor = false;
@@ -570,9 +574,9 @@
             // Btn_addmovie
             // 
             this.Btn_addmovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.Btn_addmovie.Location = new System.Drawing.Point(16, 381);
+            this.Btn_addmovie.Location = new System.Drawing.Point(12, 379);
             this.Btn_addmovie.Name = "Btn_addmovie";
-            this.Btn_addmovie.Size = new System.Drawing.Size(75, 23);
+            this.Btn_addmovie.Size = new System.Drawing.Size(75, 40);
             this.Btn_addmovie.TabIndex = 1;
             this.Btn_addmovie.Text = "Add";
             this.Btn_addmovie.UseVisualStyleBackColor = false;

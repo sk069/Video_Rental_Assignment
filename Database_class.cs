@@ -15,7 +15,7 @@ namespace Video_Rental_Assignment
         private SqlDataReader Data_Reader;
         private SqlDataAdapter da = new SqlDataAdapter();
         string QueryString;
-        public int CustomerID, MoviesID;
+        public int CustomerID, MoviesID, Rental_ID;
         public Database_class()
         {
             string ConnString = @"Data Source=LAPTOP-QI9DM23C\SQLEXPRESS;Initial Catalog=VideoRental_SQL;Integrated Security=True";
@@ -270,8 +270,8 @@ namespace Video_Rental_Assignment
             }
             return dt;
         }
-       
-    
+
+
         public DataTable FillAll_Rented_out()
         {
             DataTable dt = new DataTable();
@@ -285,14 +285,78 @@ namespace Video_Rental_Assignment
             return dt;
         }
 
+        public string IssueMovie(DateTime Issue_date)
+        {
+            try
+            {
+                Cmd.Parameters.Clear();
+                Cmd.Connection = Obj_Conn;
+                QueryString = "Insert into RentedMovies(MovieIDFK,CustIDFK,DateRented,DateReturned) values(@MovieID,@CustID,@Issue_date,Null)";
+                Cmd.Parameters.AddWithValue("@CustID", CustomerID);
+                Cmd.Parameters.AddWithValue("@MovieID", MoviesID);
+                Cmd.Parameters.AddWithValue("@Issue_date", Issue_date);
+                Cmd.CommandText = QueryString;
+                //connection opened
+                Obj_Conn.Open();
+                // Executed query
+                Cmd.ExecuteNonQuery();
+                return "Movies issued to customer";
+            }
+            catch (Exception ex)
+            {
+                // code to show error Message
+                return ex.Message;
+            }
+            finally
+            {
+                // close connection
+                if (Obj_Conn != null)
+                {
+                    Obj_Conn.Close();
+                }
+            }
+        }
 
-    }
+            public string ReturnMovie(DateTime Return_date)
+            {
+                try
+                {
+                    Cmd.Parameters.Clear();
+                    Cmd.Connection = Obj_Conn;
+                    QueryString = "update into RentedMovies(MovieIDFK,CustIDFK,DateRented,DateReturned) values(@MovieID,@CustID,@Return_date,Null)";
+                    Cmd.Parameters.AddWithValue("@CustID", CustomerID);
+                    Cmd.Parameters.AddWithValue("@MovieID", MoviesID);
+                    Cmd.Parameters.AddWithValue("@Issue_date", Return_date);
+                    Cmd.CommandText = QueryString;
+                    //connection opened
+                    Obj_Conn.Open();
+                    // Executed query
+                    Cmd.ExecuteNonQuery();
+                    return "Movies returned from customer";
+                }
+                catch (Exception ex)
+                {
+                    // code to show error Message
+                    return ex.Message;
+                }
+                finally
+                {
+                    // close connection
+                    if (Obj_Conn != null)
+                    {
+                        Obj_Conn.Close();
+                    }
+                }
+            }
 
 
 
 
-}
-           
+
+
+        
+    } 
+ }          
 
 
 

@@ -108,14 +108,30 @@ namespace Video_Rental_Assignment
 
 
 
-    
 
 
-    private void Btn_Update_customdata_Click(object sender, EventArgs e)
-    {
-        if (text_firstname.Text != "" && text_lastname.Text != "" && text_address.Text != "" && text_mobile.Text != "")
+
+        private void Btn_Update_customdata_Click(object sender, EventArgs e)
         {
-            string message = Obj_Data.CustomerUpdate(text_firstname.Text, text_lastname.Text, text_mobile.Text, text_address.Text);
+            if (text_firstname.Text != "" && text_lastname.Text != "" && text_address.Text != "" && text_mobile.Text != "")
+            {
+                string message = Obj_Data.CustomerUpdate(text_firstname.Text, text_lastname.Text, text_mobile.Text, text_address.Text);
+                MessageBox.Show(message);
+                text_firstname.Text = "";
+                text_lastname.Text = "";
+                text_mobile.Text = "";
+                text_address.Text = "";
+                tab_Customer_Data();
+            }
+            else
+            {
+                MessageBox.Show("Please fill all the fileds then press Add button");
+            }
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            string message = Obj_Data.CustomerDelete();
             MessageBox.Show(message);
             text_firstname.Text = "";
             text_lastname.Text = "";
@@ -123,22 +139,6 @@ namespace Video_Rental_Assignment
             text_address.Text = "";
             tab_Customer_Data();
         }
-        else
-        {
-            MessageBox.Show("Please fill all the fileds then press Add button");
-        }
-    }
-
-    private void btn_Delete_Click(object sender, EventArgs e)
-    {
-        string message = Obj_Data.CustomerDelete();
-        MessageBox.Show(message);
-        text_firstname.Text = "";
-        text_lastname.Text = "";
-        text_mobile.Text = "";
-        text_address.Text = "";
-        tab_Customer_Data();
-    }
 
 
 
@@ -146,7 +146,7 @@ namespace Video_Rental_Assignment
         {
             if (text_Rating.Text != "" && text_Title.Text != "" && text_year.Text != "" && Text_Rental_Cost.Text != "" && text_copies.Text != "" && text_plot.Text != "" && text_genre.Text != "")
             {
-                string message = Obj_Data.MoviesInsert(text_Rating.Text, text_Title.Text, text_year.Text,Text_Rental_Cost.Text,text_copies.Text, text_plot.Text, text_genre.Text);
+                string message = Obj_Data.MoviesInsert(text_Rating.Text, text_Title.Text, text_year.Text, Text_Rental_Cost.Text, text_copies.Text, text_plot.Text, text_genre.Text);
                 MessageBox.Show(message);
                 text_Rating.Text = "";
                 text_Title.Text = "";
@@ -184,7 +184,7 @@ namespace Video_Rental_Assignment
                 MessageBox.Show("Something is wrong", ex.Message);
             }
         }
-       
+
 
         private void Btn_updatemovie_Click(object sender, EventArgs e)
         {
@@ -237,6 +237,85 @@ namespace Video_Rental_Assignment
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btn_Issue_Click(object sender, EventArgs e)
+        {
+            if (text_TitleM.Text != "" && text_custName.Text != "")
+            {
+                string message = Obj_Data.IssueMovie(Convert.ToDateTime(issue_datePicker.Text));
+                MessageBox.Show(message);
+                text_Rating.Text = "";
+                text_Title.Text = "";
+                text_year.Text = "";
+                Text_Rental_Cost.Text = "";
+                text_copies.Text = "";
+                text_plot.Text = "";
+                text_genre.Text = "";
+                text_TitleM.Text = "";
+                text_firstname.Text = "";
+                text_lastname.Text = "";
+                text_mobile.Text = "";
+                text_address.Text = "";
+                text_custName.Text = "";
+
+                Rental_Load();
+            }
+            else
+            {
+                // code to show the message if user did not fill all the details
+                MessageBox.Show("Please fill all the required details and add the new details by clicking Add button");
+            }
+        }
+
+        private void DGV_Rental_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                string newvalue = DGV_Rental.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                this.Text = "Row : " + e.RowIndex.ToString() + " Col : " + e.ColumnIndex.ToString() + " Value = " + newvalue;
+                Obj_Data.Rental_ID = Convert.ToInt32(DGV_Rental.Rows[e.RowIndex].Cells[0].Value);
+                text_TitleM.Text = DGV_Rental.Rows[e.RowIndex].Cells[1].Value.ToString();
+                text_custName.Text = DGV_Rental.Rows[e.RowIndex].Cells[2].Value.ToString();
+                issue_datePicker.Text = DGV_Rental.Rows[e.RowIndex].Cells[3].Value.ToString();
+                Return_datePicker.Text = DGV_Rental.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+                text_TitleM.Text = DGV_movie.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something is wrong", ex.Message);
+            }
+        }
+
+        private void Btn_Return_Click(object sender, EventArgs e)
+        {
+            if (text_TitleM.Text != "" && text_custName.Text != "")
+            {
+                string message = Obj_Data.ReturnMovie(Convert.ToDateTime(Return_datePicker.Text));
+                MessageBox.Show(message);
+                text_Rating.Text = "";
+                text_Title.Text = "";
+                text_year.Text = "";
+                Text_Rental_Cost.Text = "";
+                text_copies.Text = "";
+                text_plot.Text = "";
+                text_genre.Text = "";
+                text_TitleM.Text = "";
+                text_firstname.Text = "";
+                text_lastname.Text = "";
+                text_mobile.Text = "";
+                text_address.Text = "";
+                text_custName.Text = "";
+
+                Rental_Load();
+            }
+            else
+            {
+                // code to show the message if user did not fill all the details
+                MessageBox.Show("Please fill all the required details and add the new details by clicking Add button");
             }
         }
     }
