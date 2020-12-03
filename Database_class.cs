@@ -49,7 +49,7 @@ namespace Video_Rental_Assignment
         public DataTable FillRental_Data()
         {
             DataTable dt = new DataTable();
-            QueryString = "select * From RentedMovies";
+            QueryString = "select * From All_Rented_view";
             using (da = new SqlDataAdapter(QueryString, Obj_Conn))
             {
                 Obj_Conn.Open();
@@ -101,7 +101,7 @@ namespace Video_Rental_Assignment
                 Cmd.Parameters.AddWithValue("@FirstName", firstname);
                 Cmd.Parameters.AddWithValue("@LastName", lastname);
                 Cmd.Parameters.AddWithValue("@Address", Address);
-                Cmd.Parameters.AddWithValue("@Mobile", Phone);
+                Cmd.Parameters.AddWithValue("@Phone", Phone);
                 Cmd.Parameters.AddWithValue("@CustID", CustomerID);
                 Cmd.CommandText = QueryString;
                 //connection opened
@@ -132,11 +132,11 @@ namespace Video_Rental_Assignment
                 Cmd.Connection = Obj_Conn;
 
                 Cmd.CommandText = "Customer_Delete";
-                Cmd.CommandType = CommandType.StoredProcedure;
+                //Cmd.CommandType = CommandType.StoredProcedure;
 
-                // QueryString = "Delete from Customer where CustID =@CustID";
+                QueryString = "Delete from Customer where CustID =@CustID";
                 Cmd.Parameters.AddWithValue("@CustID", CustomerID);
-                // Cmd.CommandText = QueryString;
+                Cmd.CommandText = QueryString;
                 //connection opened
                 Obj_Conn.Open();
                 // Executed query
@@ -200,7 +200,7 @@ namespace Video_Rental_Assignment
             {
                 Cmd.Parameters.Clear();
                 Cmd.Connection = Obj_Conn;
-                QueryString = "update into movies set rating = @rating,title = @title,year = @year, rental_cost = @rental_cost, copies= @copies, plot= @plot, genre= @genre where MoviesID =@MoviesID";
+                QueryString = "update movies set rating = @rating,title = @title,year = @year, rental_cost = @rental_cost, copies= @copies, plot= @plot, genre= @genre where MovieID =@MovieID";
                 Cmd.Parameters.AddWithValue("@rating", rating);
                 Cmd.Parameters.AddWithValue("@title", Title);
                 Cmd.Parameters.AddWithValue("@year", year);
@@ -208,12 +208,13 @@ namespace Video_Rental_Assignment
                 Cmd.Parameters.AddWithValue("@Copies", copies);
                 Cmd.Parameters.AddWithValue("@Plot", plot);
                 Cmd.Parameters.AddWithValue("@Genre", genre);
+                Cmd.Parameters.AddWithValue("@MovieID", MoviesID);
                 Cmd.CommandText = QueryString;
                 //connection opened
                 Obj_Conn.Open();
                 // Executed query
                 Cmd.ExecuteNonQuery();
-                return "Customer Data Updated Successfully";
+                return "Movie Updated Successfully";
             }
             catch (Exception ex)
             {
@@ -242,7 +243,7 @@ namespace Video_Rental_Assignment
                 Obj_Conn.Open();
                 // Executed query
                 Cmd.ExecuteNonQuery();
-                return "Movie Deleted Successfully";
+                return "Movie Deleted";
             }
             catch (Exception ex)
             {
@@ -317,37 +318,63 @@ namespace Video_Rental_Assignment
             }
         }
 
-            public string ReturnMovie(DateTime Return_date)
+        public string ReturnMovie(DateTime Return_date)
+        {
+            try
             {
-                try
+                Cmd.Parameters.Clear();
+                Cmd.Connection = Obj_Conn;
+                QueryString = "Update RentedMovies set DateReturned=@Return_date where RMID = @RMID";
+                Cmd.Parameters.AddWithValue("@Return_date", Return_date);
+                Cmd.Parameters.AddWithValue("@RMID", Rental_ID);
+                Cmd.CommandText = QueryString;
+                //connection opened
+                Obj_Conn.Open();
+                // Executed query
+                Cmd.ExecuteNonQuery();
+                return "Movies returned from customer";
+            }
+            catch (Exception ex)
+            {
+                // code to show error Message
+                return ex.Message;
+            }
+            finally
+            {
+                // close connection
+                if (Obj_Conn != null)
                 {
-                    Cmd.Parameters.Clear();
-                    Cmd.Connection = Obj_Conn;
-                    QueryString = "update into RentedMovies(MovieIDFK,CustIDFK,DateRented,DateReturned) values(@MovieID,@CustID,@Return_date,Null)";
-                    Cmd.Parameters.AddWithValue("@CustID", CustomerID);
-                    Cmd.Parameters.AddWithValue("@MovieID", MoviesID);
-                    Cmd.Parameters.AddWithValue("@Issue_date", Return_date);
-                    Cmd.CommandText = QueryString;
-                    //connection opened
-                    Obj_Conn.Open();
-                    // Executed query
-                    Cmd.ExecuteNonQuery();
-                    return "Movies returned from customer";
-                }
-                catch (Exception ex)
-                {
-                    // code to show error Message
-                    return ex.Message;
-                }
-                finally
-                {
-                    // close connection
-                    if (Obj_Conn != null)
-                    {
-                        Obj_Conn.Close();
-                    }
+                    Obj_Conn.Close();
                 }
             }
+        }
+
+        public DataTable FillPopular_customer_Data()
+        {
+            DataTable dt = new DataTable();
+            QueryString = "select * From Popular_customer";
+            using (da = new SqlDataAdapter(QueryString, Obj_Conn))
+            {
+                Obj_Conn.Open();
+                da.Fill(dt);
+                Obj_Conn.Close();
+            }
+            return dt;
+        }
+
+        public DataTable FillPopular_movie_Data()
+        {
+            DataTable dt = new DataTable();
+            QueryString = "select * From Popular_movie";
+            using (da = new SqlDataAdapter(QueryString, Obj_Conn))
+            {
+                Obj_Conn.Open();
+                da.Fill(dt);
+                Obj_Conn.Close();
+            }
+            return dt;
+        }
+    }   
 
 
 
@@ -355,7 +382,7 @@ namespace Video_Rental_Assignment
 
 
         
-    } 
+    
  }          
 
 

@@ -22,6 +22,8 @@ namespace Video_Rental_Assignment
             tab_Customer_Data();
             Movies_Load();
             Rental_Load();
+            popularcustomer_load();
+            popularmovie_load();
         }
 
         public void tab_Customer_Data()
@@ -129,7 +131,7 @@ namespace Video_Rental_Assignment
             }
         }
 
-        private void btn_Delete_Click(object sender, EventArgs e)
+        private void Btn_del_customer_Click(object sender, EventArgs e)
         {
             string message = Obj_Data.CustomerDelete();
             MessageBox.Show(message);
@@ -190,7 +192,7 @@ namespace Video_Rental_Assignment
         {
             if (text_Rating.Text != "" && text_Title.Text != "" && text_year.Text != "" && Text_Rental_Cost.Text != "" && text_copies.Text != "" && text_plot.Text != "" && text_genre.Text != "")
             {
-                string message = Obj_Data.MoviesInsert(text_Rating.Text, text_Title.Text, text_year.Text, Text_Rental_Cost.Text, text_copies.Text, text_plot.Text, text_genre.Text);
+                string message = Obj_Data.updatemovie(text_Rating.Text, text_Title.Text, text_year.Text, Text_Rental_Cost.Text, text_copies.Text, text_plot.Text, text_genre.Text);
                 MessageBox.Show(message);
                 text_Rating.Text = "";
                 text_Title.Text = "";
@@ -275,14 +277,11 @@ namespace Video_Rental_Assignment
             {
                 string newvalue = DGV_Rental.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 this.Text = "Row : " + e.RowIndex.ToString() + " Col : " + e.ColumnIndex.ToString() + " Value = " + newvalue;
-                Obj_Data.Rental_ID = Convert.ToInt32(DGV_Rental.Rows[e.RowIndex].Cells[0].Value);
-                text_TitleM.Text = DGV_Rental.Rows[e.RowIndex].Cells[1].Value.ToString();
-                text_custName.Text = DGV_Rental.Rows[e.RowIndex].Cells[2].Value.ToString();
-                issue_datePicker.Text = DGV_Rental.Rows[e.RowIndex].Cells[3].Value.ToString();
-                Return_datePicker.Text = DGV_Rental.Rows[e.RowIndex].Cells[4].Value.ToString();
-
-                text_TitleM.Text = DGV_movie.Rows[e.RowIndex].Cells[2].Value.ToString();
-
+                Obj_Data.Rental_ID = Convert.ToInt32(DGV_Rental.Rows[e.RowIndex].Cells[8].Value);
+                text_custName.Text = DGV_Rental.Rows[e.RowIndex].Cells[0].Value.ToString()+" " + DGV_Rental.Rows[e.RowIndex].Cells[1].Value.ToString();
+                text_TitleM.Text = DGV_Rental.Rows[e.RowIndex].Cells[3].Value.ToString();
+                issue_datePicker.Text = DGV_Rental.Rows[e.RowIndex].Cells[6].Value.ToString();
+             
             }
             catch (Exception ex)
             {
@@ -318,6 +317,36 @@ namespace Video_Rental_Assignment
                 MessageBox.Show("Please fill all the required details and add the new details by clicking Add button");
             }
         }
+
+        public void popularcustomer_load()
+        {
+            DGV_popularcustomer.DataSource = null;
+            try
+            {
+                DGV_popularcustomer.DataSource = Obj_Data.FillPopular_customer_Data();
+                DGV_popularcustomer.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void popularmovie_load()
+        {
+            DGV_popularmovie.DataSource = null;
+            try
+            {
+                DGV_popularmovie.DataSource = Obj_Data.FillPopular_movie_Data();
+                DGV_popularmovie.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        
     }
     
     

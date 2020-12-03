@@ -35,6 +35,10 @@
             this.DGV_movie = new System.Windows.Forms.DataGridView();
             this.tab_Rental = new System.Windows.Forms.TabPage();
             this.DGV_Rental = new System.Windows.Forms.DataGridView();
+            this.tb_popularcustomer = new System.Windows.Forms.TabPage();
+            this.DGV_popularcustomer = new System.Windows.Forms.DataGridView();
+            this.tab_popularmovie = new System.Windows.Forms.TabPage();
+            this.DGV_popularmovie = new System.Windows.Forms.DataGridView();
             this.Customer_panel = new System.Windows.Forms.Panel();
             this.text_mobile = new System.Windows.Forms.TextBox();
             this.lbl_address = new System.Windows.Forms.Label();
@@ -88,6 +92,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_movie)).BeginInit();
             this.tab_Rental.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Rental)).BeginInit();
+            this.tb_popularcustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_popularcustomer)).BeginInit();
+            this.tab_popularmovie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_popularmovie)).BeginInit();
             this.Customer_panel.SuspendLayout();
             this.Rental_panel.SuspendLayout();
             this.Movie_panel.SuspendLayout();
@@ -98,6 +106,8 @@
             this.tab_Movie_rental.Controls.Add(this.tab_Customer);
             this.tab_Movie_rental.Controls.Add(this.tab_Movie);
             this.tab_Movie_rental.Controls.Add(this.tab_Rental);
+            this.tab_Movie_rental.Controls.Add(this.tb_popularcustomer);
+            this.tab_Movie_rental.Controls.Add(this.tab_popularmovie);
             this.tab_Movie_rental.Location = new System.Drawing.Point(12, 12);
             this.tab_Movie_rental.Name = "tab_Movie_rental";
             this.tab_Movie_rental.SelectedIndex = 0;
@@ -169,6 +179,48 @@
             this.DGV_Rental.TabIndex = 0;
             this.DGV_Rental.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Rental_CellContentClick);
             this.DGV_Rental.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Rental_CellContentClick);
+            // 
+            // tb_popularcustomer
+            // 
+            this.tb_popularcustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.tb_popularcustomer.Controls.Add(this.DGV_popularcustomer);
+            this.tb_popularcustomer.Location = new System.Drawing.Point(4, 22);
+            this.tb_popularcustomer.Name = "tb_popularcustomer";
+            this.tb_popularcustomer.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_popularcustomer.Size = new System.Drawing.Size(614, 216);
+            this.tb_popularcustomer.TabIndex = 3;
+            this.tb_popularcustomer.Text = "Popular customer";
+            // 
+            // DGV_popularcustomer
+            // 
+            this.DGV_popularcustomer.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.DGV_popularcustomer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_popularcustomer.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.DGV_popularcustomer.Location = new System.Drawing.Point(6, 6);
+            this.DGV_popularcustomer.Name = "DGV_popularcustomer";
+            this.DGV_popularcustomer.Size = new System.Drawing.Size(602, 204);
+            this.DGV_popularcustomer.TabIndex = 0;
+            // 
+            // tab_popularmovie
+            // 
+            this.tab_popularmovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tab_popularmovie.Controls.Add(this.DGV_popularmovie);
+            this.tab_popularmovie.Location = new System.Drawing.Point(4, 22);
+            this.tab_popularmovie.Name = "tab_popularmovie";
+            this.tab_popularmovie.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_popularmovie.Size = new System.Drawing.Size(614, 216);
+            this.tab_popularmovie.TabIndex = 4;
+            this.tab_popularmovie.Text = "Popular movie";
+            // 
+            // DGV_popularmovie
+            // 
+            this.DGV_popularmovie.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.DGV_popularmovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_popularmovie.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.DGV_popularmovie.Location = new System.Drawing.Point(6, 6);
+            this.DGV_popularmovie.Name = "DGV_popularmovie";
+            this.DGV_popularmovie.Size = new System.Drawing.Size(602, 204);
+            this.DGV_popularmovie.TabIndex = 0;
             // 
             // Customer_panel
             // 
@@ -274,6 +326,7 @@
             this.Btn_del_customer.TabIndex = 2;
             this.Btn_del_customer.Text = "Delete";
             this.Btn_del_customer.UseVisualStyleBackColor = false;
+            this.Btn_del_customer.Click += new System.EventHandler(this.Btn_del_customer_Click);
             // 
             // Btn_Add_customer
             // 
@@ -635,6 +688,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_movie)).EndInit();
             this.tab_Rental.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Rental)).EndInit();
+            this.tb_popularcustomer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_popularcustomer)).EndInit();
+            this.tab_popularmovie.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_popularmovie)).EndInit();
             this.Customer_panel.ResumeLayout(false);
             this.Customer_panel.PerformLayout();
             this.Rental_panel.ResumeLayout(false);
@@ -700,6 +757,10 @@
         private System.Windows.Forms.Button btn_Issue;
         private System.Windows.Forms.Button btn_allrented;
         private System.Windows.Forms.Button btn_rentedout;
+        private System.Windows.Forms.TabPage tb_popularcustomer;
+        private System.Windows.Forms.DataGridView DGV_popularcustomer;
+        private System.Windows.Forms.TabPage tab_popularmovie;
+        private System.Windows.Forms.DataGridView DGV_popularmovie;
     }
 }
 
