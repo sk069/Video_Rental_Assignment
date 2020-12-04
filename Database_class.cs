@@ -15,12 +15,16 @@ namespace Video_Rental_Assignment
         private SqlDataReader Data_Reader;
         private SqlDataAdapter da = new SqlDataAdapter();
         string QueryString;
+        public string ConnString = @"Data Source=LAPTOP-QI9DM23C\SQLEXPRESS;Initial Catalog=VideoRental_SQL;Integrated Security=True";
+       
         public int CustomerID, MoviesID, Rental_ID;
         public Database_class()
         {
             string ConnString = @"Data Source=LAPTOP-QI9DM23C\SQLEXPRESS;Initial Catalog=VideoRental_SQL;Integrated Security=True";
             Obj_Conn.ConnectionString = ConnString;
         }
+
+        //code to fill customer data in DGV from database
 
         public DataTable FillCustomer_Data()
         {
@@ -34,6 +38,8 @@ namespace Video_Rental_Assignment
             }
             return dt;
         }
+
+        //code to fill movie data in DGV from database
         public DataTable FillMovies_Data()
         {
             DataTable dt = new DataTable();
@@ -46,6 +52,8 @@ namespace Video_Rental_Assignment
             }
             return dt;
         }
+
+        //code to fill rental datain DGV from database
         public DataTable FillRental_Data()
         {
             DataTable dt = new DataTable();
@@ -58,6 +66,8 @@ namespace Video_Rental_Assignment
             }
             return dt;
         }
+
+        //code to insert new costomer
         public string CustomerInsert(string FName, string LName, string Phone, string Address)
         {
             try
@@ -91,6 +101,8 @@ namespace Video_Rental_Assignment
                 }
             }
         }
+
+        //code to update customer
         public string CustomerUpdate(string firstname, string lastname, string Phone, string Address)
         {
             try
@@ -124,6 +136,8 @@ namespace Video_Rental_Assignment
                 }
             }
         }
+
+        //code to delete customer
         public string CustomerDelete()
         {
             try
@@ -158,6 +172,8 @@ namespace Video_Rental_Assignment
             }
 
         }
+
+        //code to insert movie
         public string MoviesInsert(string rating, string Title, string year, string Rental_Cost, string copies, string plot, string genre)
         {
             try
@@ -178,7 +194,7 @@ namespace Video_Rental_Assignment
                 Obj_Conn.Open();
                 // Executed query
                 Cmd.ExecuteNonQuery();
-                return "Movie Data Inserted Successfully";
+                return "New Movie added Inserted Successfully";
             }
             catch (Exception ex)
             {
@@ -194,6 +210,8 @@ namespace Video_Rental_Assignment
                 }
             }
         }
+
+        //code to update movie
         public string updatemovie(string rating, string Title, string year, string Rental_Cost, string copies, string plot, string genre)
         {
             try
@@ -214,7 +232,7 @@ namespace Video_Rental_Assignment
                 Obj_Conn.Open();
                 // Executed query
                 Cmd.ExecuteNonQuery();
-                return "Movie Updated Successfully";
+                return "Movie data Updated Successfully";
             }
             catch (Exception ex)
             {
@@ -230,6 +248,8 @@ namespace Video_Rental_Assignment
                 }
             }
         }
+
+        //code to movie delete
         public string MoviesDelete()
         {
             try
@@ -259,6 +279,9 @@ namespace Video_Rental_Assignment
                 }
             }
         }
+
+
+        //code to view all rented movies
         public DataTable Rental_Load()
         {
             DataTable dt = new DataTable();
@@ -272,7 +295,7 @@ namespace Video_Rental_Assignment
             return dt;
         }
 
-
+        //code to show all rented out movies
         public DataTable FillAll_Rented_out()
         {
             DataTable dt = new DataTable();
@@ -285,6 +308,8 @@ namespace Video_Rental_Assignment
             }
             return dt;
         }
+
+        //code to issue new movie to customer
 
         public string IssueMovie(DateTime Issue_date)
         {
@@ -318,6 +343,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to return movie from customer
+
         public string ReturnMovie(DateTime Return_date)
         {
             try
@@ -349,6 +376,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to define popular customer
+
         public DataTable FillPopular_customer_Data()
         {
             DataTable dt = new DataTable();
@@ -362,6 +391,8 @@ namespace Video_Rental_Assignment
             return dt;
         }
 
+
+        //code to define popular movie
         public DataTable FillPopular_movie_Data()
         {
             DataTable dt = new DataTable();

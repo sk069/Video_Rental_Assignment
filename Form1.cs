@@ -25,6 +25,7 @@ namespace Video_Rental_Assignment
             popularcustomer_load();
             popularmovie_load();
         }
+        //code to show customer data in data grid view
 
         public void tab_Customer_Data()
         {
@@ -40,6 +41,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to show movies data in data grid view
+
         public void Movies_Load()
         {
             DGV_movie.DataSource = null;
@@ -54,6 +57,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to show all rental movies in data grid view
+
         public void Rental_Load()
         {
             DGV_Rental.DataSource = null;
@@ -67,6 +72,8 @@ namespace Video_Rental_Assignment
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //code to add new customer
 
         private void Btn_Add_customer_Click(object sender, EventArgs e)
         {
@@ -85,6 +92,7 @@ namespace Video_Rental_Assignment
                 MessageBox.Show("Please fill all the fileds then press Add button");
             }
         }
+        //code to select data in customer table from customer data grid view
 
         private void DGV_Customer_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -111,7 +119,7 @@ namespace Video_Rental_Assignment
 
 
 
-
+        //code to update customer data
 
         private void Btn_Update_customdata_Click(object sender, EventArgs e)
         {
@@ -131,6 +139,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to delete customer
+
         private void Btn_del_customer_Click(object sender, EventArgs e)
         {
             string message = Obj_Data.CustomerDelete();
@@ -142,7 +152,7 @@ namespace Video_Rental_Assignment
             tab_Customer_Data();
         }
 
-
+        //code to add new movie
 
         private void Btn_addmovie_Click(object sender, EventArgs e)
         {
@@ -165,6 +175,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+
+        //code to add movie data in movies table from movies data grid
         private void DGV_Movie_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -188,6 +200,7 @@ namespace Video_Rental_Assignment
         }
 
 
+        //code to update movie content
         private void Btn_updatemovie_Click(object sender, EventArgs e)
         {
             if (text_Rating.Text != "" && text_Title.Text != "" && text_year.Text != "" && Text_Rental_Cost.Text != "" && text_copies.Text != "" && text_plot.Text != "" && text_genre.Text != "")
@@ -209,6 +222,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+
+        //code to delete movie
         private void Btn_delmovie_Click(object sender, EventArgs e)
         {
             string message = Obj_Data.MoviesDelete();
@@ -222,12 +237,16 @@ namespace Video_Rental_Assignment
             text_genre.Text = "";
             Movies_Load();
         }
+        
 
+        //button for show all rented movies
         private void btn_allrented_Click(object sender, EventArgs e)
         {
             Rental_Load();
         }
 
+
+        //button for all rented out movies
         private void btn_rentedout_Click(object sender, EventArgs e)
         {
             DGV_Rental.DataSource = null;
@@ -242,6 +261,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+
+        //button for issue movie
         private void btn_Issue_Click(object sender, EventArgs e)
         {
             if (text_TitleM.Text != "" && text_custName.Text != "")
@@ -271,6 +292,8 @@ namespace Video_Rental_Assignment
             }
         }
 
+        //code to select rentel detail from data grid view
+
         private void DGV_Rental_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -288,6 +311,8 @@ namespace Video_Rental_Assignment
                 MessageBox.Show("Something is wrong", ex.Message);
             }
         }
+
+        //button to return movie from customer
 
         private void Btn_Return_Click(object sender, EventArgs e)
         {
@@ -314,9 +339,11 @@ namespace Video_Rental_Assignment
             else
             {
                 // code to show the message if user did not fill all the details
-                MessageBox.Show("Please fill all the required details and add the new details by clicking Add button");
+                MessageBox.Show("Please fill all the required details");
             }
         }
+
+        //code to show popular customer in data grid view
 
         public void popularcustomer_load()
         {
@@ -331,6 +358,8 @@ namespace Video_Rental_Assignment
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //code to show popular movie in data grid view
 
         public void popularmovie_load()
         {
